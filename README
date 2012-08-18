@@ -1,0 +1,6 @@
+This program implements the P^2 algorithm as documented in "The P-Square Algorithm for Dynamic Calculation of Percentiles and Histograms without Storing Observations," Communications of the ACM, October 1985 by R. Jain and I. Chlamtac.
+
+Both the point method and histogram method are implemented.
+
+p2.cc implements the algorithm. main.cc is a test driver program. data.txt provides sample data to test the algorithm. It is sampled from a normal distribution with mean=0, standard deviation=1.
+It was generated using R (http://www.r-project.org/) with the function "runif(200)".
