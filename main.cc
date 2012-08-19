@@ -38,8 +38,9 @@ int main(int argc, char *argv[])
 	}
 
     // Read data from a file, one value per line. Add it into each of the p2_t trackers
-	while(!feof(fi) ) {
+	while(true) {
 		fgets(buf, 30, fi);
+        if(feof(fi)) break;
 		d = strtod(buf, NULL);
 
 		p2_10.add( d );
