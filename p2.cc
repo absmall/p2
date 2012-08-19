@@ -215,7 +215,14 @@ double p2_t::result( )
 double p2_t::result( double quantile )
 {
 	if( count < marker_count ) {
-		throw std::runtime_error("Insufficient data");
+		int closest = 1;
+        p2_sort(q, count);
+		for( int i = 2; i < count; i ++ ) {
+			if( fabs(((double)i)/count - quantile) < fabs(((double)closest)/marker_count - quantile ) ) {
+				closest = i;
+			}
+		}
+		return q[ closest ];
 	} else {
 		// Figure out which quantile is the one we're looking for by nearest dn
 		int closest = 1;
