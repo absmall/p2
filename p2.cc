@@ -1,10 +1,6 @@
 #include <math.h>
-#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <stdexcept>
-#include <fstream>
-#include <iostream>
 #include "p2.h"
 
 using namespace std;
@@ -18,12 +14,10 @@ p2_t::p2_t( )
 
 p2_t::~p2_t( )
 {
-	if( marker_count != 0 ) {
-		delete [] q;
-		delete [] dn;
-		delete [] np;
-		delete [] n;
-	}
+    delete [] q;
+    delete [] dn;
+    delete [] np;
+    delete [] n;
 }
 
 p2_t::p2_t( double quant )
@@ -91,8 +85,8 @@ void p2_t::add_quantile( double quant )
 
 	/* Add in appropriate dn markers */
 	markers[0] = quant;
-	markers[1] = (1.0+quant)/2.0;
-	markers[2] = quant/2.0;
+	markers[1] = quant/2.0;
+	markers[2] = (1.0+quant)/2.0;
 
 	update_markers( );
 }
@@ -118,6 +112,8 @@ inline int sign( double d )
 	}
 }
 
+// Simple bubblesort, because bubblesort is efficient for small count, and
+// count is likely to be small
 void p2_t::p2_sort( double *q, int count )
 {
 	double k;
@@ -213,11 +209,7 @@ double p2_t::result( )
 	if( marker_count != 5 ) {
 		throw std::runtime_error("Multiple quantiles in use");
 	}
-	if( count < marker_count ) {
-		throw std::runtime_error("Insufficient data");
-	} else {
-		return q[ (marker_count - 1) / 2 ];
-	}
+    return result( dn[(marker_count - 1) / 2] );
 }
 
 double p2_t::result( double quantile )
