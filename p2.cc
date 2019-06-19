@@ -84,8 +84,8 @@ void p2_t::add_quantile( double quant )
 	double *markers = allocate_markers( 3 );
 
 	/* Add in appropriate dn markers */
-	markers[0] = quant;
-	markers[1] = quant/2.0;
+	markers[0] = quant/2.0;
+	markers[1] = quant;
 	markers[2] = (1.0+quant)/2.0;
 
 	update_markers( );
